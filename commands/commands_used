@@ -1,0 +1,2 @@
+ansible-playbook -i new/hosts.ini users.yml
+ansible-playbook -i new/hosts.ini master.yml

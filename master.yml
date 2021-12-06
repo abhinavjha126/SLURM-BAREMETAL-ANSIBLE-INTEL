@@ -1,0 +1,40 @@
+- hosts: master 
+  user: admin
+  become: yes
+  connection: ssh
+  tasks:
+     - name: Install munge,mariadb-server and git
+       command: apt update -y && apt install munge -y && apt install vim -y && apt install build-essential -y && apt install git -y && apt-get install mariadb-server -y && apt install wget -y
+
+     - name: Set up Debian Frontend
+       command: export DEBIAN_FRONTEND="noninteractive"
+
+     - name: Install slurm and slurm-client
+       command: apt install slurmd slurm-client -y
+
+     - name: Install python
+       command: apt install sudo -y && apt install python3.9 python3-pip -y
+
+     - name: Copy slurm.conf to remote server
+       copy:
+          src: /home/ubuntu/slurm.conf
+          dest: /etc/slurm-llnl/
+
+     - name: Copy cgroup.conf to remote server
+       copy:
+          src: /home/ubuntu/cgroup.conf
+          dest: /etc/slurm-llnl/
+
+     - name: Copy docker-entrypoint.sh to remote server
+       copy:
+          src: /home/ubuntu/docker-entrypoint.sh
+          dest: /etc/slurm-llnl/
+
+     - name: Install libopenmpi-dev and mpi4py
+       command: apt update -y && apt install libopenmpi-dev -y && pip3 install mpi4py
+
+     - name: Start munge service
+       action: service name=munge state=present
+
+     - name: Start slurmctld service
+       action: service name=slurmctld state=present
