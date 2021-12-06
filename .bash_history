@@ -1,2 +1,0 @@
-sudo si
-sudo su
