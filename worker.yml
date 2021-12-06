@@ -1,10 +1,10 @@
-- hosts: master 
+- hosts: worker
   user: root
   become: yes
   connection: ssh
   tasks:
      - name: Update
-       command: apt update -y 
+       command: apt update -y
 
      - name: Install munge
        action: apt name=munge state=present
@@ -24,18 +24,23 @@
      - name: Install wget
        action: apt name=wget state=present
 
-     - name: Install slurmd 
+     - name: Install slurmd
        action: apt name=slurmd state=present
-     
+
      - name: Install slurm-client
        action: apt name=slurm-client state=present
 
-     - name: Install slurmctld
-       action: apt name=slurmctld state=present
-
      - name: Install python
        command: apt install sudo python3.9 python3-pip -y
+   
+     - name: Update
+       command: apt update -y
 
+     - name: Install libopenmpi-dev
+       command: apt install libopenmpi-dev -y
+
+     - name: Install mpi4py
+       command: pip3 install mpi4py
      - name: Copy slurm.conf to remote server
        copy:
           src: /Users/saurabh/Desktop/SLURM-BAREMETAL/slurm.conf
@@ -59,5 +64,5 @@
      - name: Start munge service
        action: service name=munge state=restarted
 
-     - name: Start slurmctld service
-       action: service name=slurmctld state=restarted
+     - name: Start slurmd service
+       action: service name=slurmd state=restarted
