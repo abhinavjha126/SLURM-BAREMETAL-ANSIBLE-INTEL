@@ -1,0 +1,6 @@
+[master]
+10.14.20.159 ansible_connection=ssh ansible_user=sdp ansible_password='redHAT733#@+'
+
+[worker]
+10.14.20.128 ansible_connection=ssh ansible_user=sdp ansible_password='redHAT733#@+'
+10.14.20.135 ansible_connection=ssh ansible_user=sdp ansible_password='redHAT733#@+'

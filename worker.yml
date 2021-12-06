@@ -41,24 +41,25 @@
 
      - name: Install mpi4py
        command: pip3 install mpi4py
+
      - name: Copy slurm.conf to remote server
        copy:
-          src: /Users/saurabh/Desktop/SLURM-BAREMETAL/slurm.conf
+          src: /home/sdp/Slurm-Ansible/SLURM-BAREMETAL-AWS/slurm.conf
           dest: /etc/slurm-llnl/
 
      - name: Copy cgroup.conf to remote server
        copy:
-          src: /Users/saurabh/Desktop/SLURM-BAREMETAL/cgroup.conf
+          src: /home/sdp/Slurm-Ansible/SLURM-BAREMETAL-AWS/cgroup.conf
           dest: /etc/slurm-llnl/
 
      - name: Copy docker-entrypoint.sh to remote server
        copy:
-          src: /Users/saurabh/Desktop/SLURM-BAREMETAL/docker-entrypoint.sh
+          src: /home/sdp/Slurm-Ansible/SLURM-BAREMETAL-AWS/docker-entrypoint.sh
           dest: /etc/slurm-llnl/
 
      - name: Copy Munge key
        copy:
-          src: /Users/saurabh/Desktop/SLURM-BAREMETAL/munge.key
+          src: /home/sdp/Slurm-Ansible/SLURM-BAREMETAL-AWS/munge.key
           dest: /etc/munge/
 
      - name: Start munge service
